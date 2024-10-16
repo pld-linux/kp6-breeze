@@ -7,7 +7,7 @@
 Summary:	Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
 Name:		kp6-%{kpname}
 Version:	6.2.1
-Release:	1
+Release:	2
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -134,6 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/breeze-settings6
+%dir %{_libdir}/qt6/plugins/kstyle_config
 %attr(755,root,root) %{_libdir}/qt6/plugins/kstyle_config/breezestyleconfig.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/org.kde.kdecoration2.kcm/kcm_breezedecoration.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/org.kde.kdecoration2/org.kde.breeze.so
