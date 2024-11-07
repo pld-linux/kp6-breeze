@@ -1,10 +1,12 @@
 #
 # Conditional build:
-%bcond_with	tests		# build with tests
+%bcond_with	tests	# test suite
+
 %define		kdeplasmaver	6.2.3
 %define		qtver		5.15.2
 %define		kpname		breeze
 Summary:	Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
+Summary(pl.UTF-8):	Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop
 Name:		kp6-%{kpname}
 Version:	6.2.3
 Release:	1
@@ -60,6 +62,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Artwork, styles and assets for the Breeze visual style for the Plasma
 Desktop.
 
+%description -l pl.UTF-8
+Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop.
+
 %package data
 Summary:	Data files for %{kpname}
 Summary(pl.UTF-8):	Dane dla %{kpname}
@@ -74,21 +79,21 @@ Data for %{kpname}.
 Dane dla %{kpname}.
 
 %package devel
-Summary:	Breeze devel
-Summary(pl.UTF-8):	Breeze devel
+Summary:	Breeze development files
+Summary(pl.UTF-8):	Pliki programistyczne stylu Breeze
 Group:		Development
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	kp5-%{kpname}-devel < %{version}
 
 %description devel
-Artwork, styles and assets for the Breeze visual style for the Plasma
-Desktop. Devel files
+Development files for Breeze style data.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe dla programistów używających %{kpname}.
+Pliki programistyczne danych stylu Breeze.
 
 %package -n %{kpname}-cursor-theme
 Summary:	Breeze cursor theme
+Summary(pl.UTF-8):	Motyw kursora Breeze
 Group:		Themes
 Conflicts:	breeze-icon-theme < 5.4.0-7
 Conflicts:	kp6-breeze < 5.4.0-5
@@ -96,6 +101,9 @@ BuildArch:	noarch
 
 %description -n %{kpname}-cursor-theme
 Breeze cursor theme.
+
+%description -n %{kpname}-cursor-theme -l pl.UTF-8
+Motyw kursora Breeze.
 
 %prep
 %setup -q -n %{kpname}-%{version}
