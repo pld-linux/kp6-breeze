@@ -53,7 +53,7 @@ BuildRequires:	xz
 Requires:	%{kpname}-cursor-theme = %{version}-%{release}
 Requires:	kf6-breeze-icons
 Requires:	kp6-breeze-data = %{version}-%{release}
-Obsoletes:	kp5-%{kpname} < %{version}
+Obsoletes:	kp5-breeze < 6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,7 +69,7 @@ Summary(pl.UTF-8):	Dane dla %{kpname}
 Group:		X11/Applications
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
-Obsoletes:	kp5-%{kpname}-data < %{version}
+Obsoletes:	kp5-breeze-data < 6
 BuildArch:	noarch
 
 %description data
@@ -83,7 +83,7 @@ Summary:	Breeze development files
 Summary(pl.UTF-8):	Pliki programistyczne stylu Breeze
 Group:		Development
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	kp5-%{kpname}-devel < %{version}
+Obsoletes:	kp5-breeze-devel < 6
 
 %description devel
 Development files for Breeze style data.
