@@ -14,7 +14,7 @@ License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
 # Source0-md5:	a8564513b84247f088c7e75b41d2a8c7
-URL:		http://www.kde.org/
+URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6DBus-devel
 BuildRequires:	Qt6Gui-devel
@@ -51,8 +51,6 @@ BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	%{kpname}-cursor-theme = %{version}-%{release}
-Requires:	gtk-update-icon-cache
-Requires:	hicolor-icon-theme
 Requires:	kf6-breeze-icons
 Requires:	kp6-breeze-data = %{version}-%{release}
 Obsoletes:	kp5-%{kpname} < %{version}
@@ -69,6 +67,8 @@ Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop.
 Summary:	Data files for %{kpname}
 Summary(pl.UTF-8):	Dane dla %{kpname}
 Group:		X11/Applications
+Requires(post,postun):	gtk-update-icon-cache
+Requires:	hicolor-icon-theme
 Obsoletes:	kp5-%{kpname}-data < %{version}
 BuildArch:	noarch
 
@@ -115,6 +115,7 @@ Motyw kursora Breeze.
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DBUILD_QT6=ON \
 	-DBUILD_QT5=OFF
+
 %ninja_build -C build
 
 %if %{with tests}
@@ -124,6 +125,7 @@ ctest
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_iconsdir}/{breeze-dark,breeze}
+
 %ninja_install -C build
 
 %find_lang %{kpname} --all-name --with-kde
@@ -134,10 +136,10 @@ hardlink -c -v $RPM_BUILD_ROOT%{_datadir}/icons/Breeze_Snow
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
+%post	data
 %update_icon_cache hicolor
 
-%postun
+%postun	data
 %update_icon_cache hicolor
 
 %files
@@ -151,22 +153,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
-%{_iconsdir}/hicolor/scalable/apps/breeze-settings.svgz
 %dir %{_datadir}/QtCurve
 %{_datadir}/QtCurve/Breeze.qtcurve
 %dir %{_datadir}/color-schemes
+%{_datadir}/color-schemes/BreezeClassic.colors
 %{_datadir}/color-schemes/BreezeDark.colors
+%{_datadir}/color-schemes/BreezeLight.colors
 %{_datadir}/kstyle/themes/breeze.themerc
 %{_datadir}/wallpapers/Next
-%{_datadir}/color-schemes/BreezeLight.colors
-%{_datadir}/color-schemes/BreezeClassic.colors
 %{_desktopdir}/breezestyleconfig.desktop
 %{_desktopdir}/kcm_breezedecoration.desktop
+%{_iconsdir}/hicolor/scalable/apps/breeze-settings.svgz
 
 %files -n %{kpname}-cursor-theme
 %defattr(644,root,root,755)
-%{_iconsdir}/breeze_cursors
 %{_iconsdir}/Breeze_Light
+%{_iconsdir}/breeze_cursors
 
 %files devel
 %defattr(644,root,root,755)
