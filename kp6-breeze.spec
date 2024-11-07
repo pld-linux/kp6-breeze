@@ -44,7 +44,8 @@ BuildRequires:	ninja
 BuildRequires:	pkgconfig
 BuildRequires:	qt6-build >= %{qtver}
 BuildRequires:	qt6-qmake
-BuildRequires:	rpmbuild(macros) >= 1.596
+BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	%{kpname}-cursor-theme = %{version}-%{release}
