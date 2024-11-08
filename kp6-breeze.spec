@@ -2,8 +2,9 @@
 # Conditional build:
 %bcond_with	tests	# test suite
 
-%define		kdeplasmaver	6.2.3
-%define		qtver		5.15.2
+%define		kdeplasmaver	%{version}
+%define		qt_ver		6.7.0
+%define		kf_ver		6.5.0
 %define		kpname		breeze
 Summary:	Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
 Summary(pl.UTF-8):	Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop
@@ -15,43 +16,56 @@ Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
 # Source0-md5:	a8564513b84247f088c7e75b41d2a8c7
 URL:		https://kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6DBus-devel
-BuildRequires:	Qt6Gui-devel
-BuildRequires:	Qt6Quick-devel
-BuildRequires:	Qt6Widgets-devel
-BuildRequires:	Qt6Xml-devel
+BuildRequires:	Qt6Core-devel >= %{qt_ver}
+BuildRequires:	Qt6DBus-devel >= %{qt_ver}
+BuildRequires:	Qt6Gui-devel >= %{qt_ver}
+BuildRequires:	Qt6Network-devel >= %{qt_ver}
+BuildRequires:	Qt6OpenGL-devel >= %{qt_ver}
+BuildRequires:	Qt6Quick-devel >= %{qt_ver}
+BuildRequires:	Qt6Widgets-devel >= %{qt_ver}
 BuildRequires:	cmake >= 3.16.0
-BuildRequires:	fftw3-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	hardlink >= 1.0-3
-BuildRequires:	kf6-attica-devel
-BuildRequires:	kf6-extra-cmake-modules >= 1.4.0
-BuildRequires:	kf6-frameworkintegration-devel
-BuildRequires:	kf6-kauth-devel
-BuildRequires:	kf6-kcmutils-devel
-BuildRequires:	kf6-kcodecs-devel
-BuildRequires:	kf6-kconfig-devel
-BuildRequires:	kf6-kconfigwidgets-devel
-BuildRequires:	kf6-kcoreaddons-devel
-BuildRequires:	kf6-kguiaddons-devel
-BuildRequires:	kf6-ki18n-devel
-BuildRequires:	kf6-kiconthemes-devel
-BuildRequires:	kf6-kservice-devel
-BuildRequires:	kf6-kwidgetsaddons-devel
-BuildRequires:	kf6-kwindowsystem-devel
+BuildRequires:	kf6-extra-cmake-modules >= 5.102.0
+BuildRequires:	kf6-frameworkintegration-devel >= %{kf_ver}
+BuildRequires:	kf6-kcmutils-devel >= %{kf_ver}
+BuildRequires:	kf6-kcolorscheme-devel >= %{kf_ver}
+BuildRequires:	kf6-kconfig-devel >= %{kf_ver}
+BuildRequires:	kf6-kconfigwidgets-devel >= %{kf_ver}
+BuildRequires:	kf6-kcoreaddons-devel >= %{kf_ver}
+BuildRequires:	kf6-kguiaddons-devel >= %{kf_ver}
+BuildRequires:	kf6-ki18n-devel >= %{kf_ver}
+BuildRequires:	kf6-kiconthemes-devel >= %{kf_ver}
+BuildRequires:	kf6-kirigami-devel >= %{kf_ver}
+BuildRequires:	kf6-kwidgetsaddons-devel >= %{kf_ver}
+BuildRequires:	kf6-kwindowsystem-devel >= %{kf_ver}
 BuildRequires:	kp6-kdecoration-devel
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:8
 BuildRequires:	ninja
 BuildRequires:	pkgconfig
-BuildRequires:	qt6-build >= %{qtver}
-BuildRequires:	qt6-qmake
+BuildRequires:	qt6-build >= %{qt_ver}
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	%{kpname}-cursor-theme = %{version}-%{release}
+Requires:	Qt6Core >= %{qt_ver}
+Requires:	Qt6DBus >= %{qt_ver}
+Requires:	Qt6Gui >= %{qt_ver}
+Requires:	Qt6Quick >= %{qt_ver}
+Requires:	Qt6Widgets >= %{qt_ver}
 Requires:	kf6-breeze-icons
+Requires:	kf6-frameworkintegration >= %{kf_ver}
+Requires:	kf6-kcmutils >= %{kf_ver}
+Requires:	kf6-kcolorscheme >= %{kf_ver}
+Requires:	kf6-kconfig >= %{kf_ver}
+Requires:	kf6-kcoreaddons >= %{kf_ver}
+Requires:	kf6-kguiaddons >= %{kf_ver}
+Requires:	kf6-ki18n >= %{kf_ver}
+Requires:	kf6-kiconthemes >= %{kf_ver}
+Requires:	kf6-kirigami >= %{kf_ver}
+Requires:	kf6-kwidgetsaddons >= %{kf_ver}
+Requires:	kf6-kwindowsystem >= %{kf_ver}
 Requires:	kp6-breeze-data = %{version}-%{release}
 Obsoletes:	kp5-breeze < 6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -128,7 +142,8 @@ install -d $RPM_BUILD_ROOT%{_iconsdir}/{breeze-dark,breeze}
 
 %ninja_install -C build
 
-%find_lang %{kpname} --all-name --with-kde
+# breeze_kwin_deco, breeze_style_config domains
+%find_lang %{kpname} --all-name
 
 hardlink -c -v $RPM_BUILD_ROOT%{_datadir}/icons/breeze_cursors
 hardlink -c -v $RPM_BUILD_ROOT%{_datadir}/icons/Breeze_Snow
@@ -144,6 +159,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc AUTHORS README.md
 %attr(755,root,root) %{_bindir}/breeze-settings6
 %dir %{_libdir}/qt6/plugins/kstyle_config
 %attr(755,root,root) %{_libdir}/qt6/plugins/kstyle_config/breezestyleconfig.so
