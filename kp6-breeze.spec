@@ -15,6 +15,7 @@ License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
 # Source0-md5:	4a883878aec90d6e2ebbe0de7478fd2c
+Patch0:		qdebug.patch
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
@@ -121,6 +122,7 @@ Motyw kursora Breeze.
 
 %prep
 %setup -q -n %{kpname}-%{version}
+%patch -P 0 -p1
 
 %build
 %cmake -B build \
