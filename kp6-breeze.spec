@@ -2,20 +2,19 @@
 # Conditional build:
 %bcond_with	tests	# test suite
 
-%define		kdeplasmaver	6.3.4
+%define		kdeplasmaver	6.3.5
 %define		qt_ver		6.7.0
 %define		kf_ver		6.5.0
 %define		kpname		breeze
 Summary:	Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
 Summary(pl.UTF-8):	Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop
 Name:		kp6-%{kpname}
-Version:	6.3.4
+Version:	6.3.5
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	4a883878aec90d6e2ebbe0de7478fd2c
-Patch0:		qdebug.patch
+# Source0-md5:	205c0f8a5754540b1f4ab5d8d11d8e5a
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
@@ -82,6 +81,7 @@ Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop.
 Summary:	Data files for %{kpname}
 Summary(pl.UTF-8):	Dane dla %{kpname}
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Obsoletes:	kp5-breeze-data < 6
@@ -122,7 +122,6 @@ Motyw kursora Breeze.
 
 %prep
 %setup -q -n %{kpname}-%{version}
-%patch -P 0 -p1
 
 %build
 %cmake -B build \
@@ -155,9 +154,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	data
 %update_icon_cache hicolor
+%update_desktop_database_post
 
 %postun	data
 %update_icon_cache hicolor
+%update_desktop_database_postun
 
 %files
 %defattr(644,root,root,755)
