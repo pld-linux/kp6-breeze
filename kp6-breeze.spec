@@ -2,19 +2,19 @@
 # Conditional build:
 %bcond_with	tests	# test suite
 
-%define		kdeplasmaver	6.3.5
+%define		kdeplasmaver	6.4.0
 %define		qt_ver		6.7.0
 %define		kf_ver		6.5.0
 %define		kpname		breeze
 Summary:	Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
 Summary(pl.UTF-8):	Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop
 Name:		kp6-%{kpname}
-Version:	6.3.5
+Version:	6.4.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	205c0f8a5754540b1f4ab5d8d11d8e5a
+# Source0-md5:	b15358e372172b115cf185be8888fd21
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
