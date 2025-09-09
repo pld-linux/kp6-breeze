@@ -2,19 +2,19 @@
 # Conditional build:
 %bcond_with	tests	# test suite
 
-%define		kdeplasmaver	6.4.4
+%define		kdeplasmaver	6.4.5
 %define		qt_ver		6.7.0
 %define		kf_ver		6.5.0
 %define		kpname		breeze
 Summary:	Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
 Summary(pl.UTF-8):	Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop
 Name:		kp6-%{kpname}
-Version:	6.4.4
+Version:	6.4.5
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	e45d3b003a98b53f93b027b26038a4d2
+# Source0-md5:	ad0485620c64e1acb3fad33b59dbaff4
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
@@ -49,7 +49,6 @@ BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	%{kpname}-cursor-theme = %{version}-%{release}
-Requires:	Qt6Core >= %{qt_ver}
 Requires:	Qt6DBus >= %{qt_ver}
 Requires:	Qt6Gui >= %{qt_ver}
 Requires:	Qt6Quick >= %{qt_ver}
@@ -67,6 +66,7 @@ Requires:	kf6-kirigami >= %{kf_ver}
 Requires:	kf6-kwidgetsaddons >= %{kf_ver}
 Requires:	kf6-kwindowsystem >= %{kf_ver}
 Requires:	kp6-breeze-data = %{version}-%{release}
+%requires_eq_to Qt6Core Qt6Core-devel
 Obsoletes:	kp5-breeze < 6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
