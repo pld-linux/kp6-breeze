@@ -2,19 +2,19 @@
 # Conditional build:
 %bcond_with	tests	# test suite
 
-%define		kdeplasmaver	6.4.5
+%define		kdeplasmaver	6.5.0
 %define		qt_ver		6.7.0
 %define		kf_ver		6.5.0
 %define		kpname		breeze
 Summary:	Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
 Summary(pl.UTF-8):	Grafika, style i zasoby dla stylu Breeze środowiska Plasma Desktop
 Name:		kp6-%{kpname}
-Version:	6.4.5
-Release:	2
+Version:	6.5.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	ad0485620c64e1acb3fad33b59dbaff4
+# Source0-md5:	d559d9b3e77912ec91bca849dea2fc4c
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
@@ -166,10 +166,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/breeze-settings6
 %attr(755,root,root) %{_bindir}/kcursorgen
 %dir %{_libdir}/qt6/plugins/kstyle_config
-%attr(755,root,root) %{_libdir}/qt6/plugins/kstyle_config/breezestyleconfig.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/org.kde.kdecoration3.kcm/kcm_breezedecoration.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/org.kde.kdecoration3/org.kde.breeze.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/styles/breeze6.so
+%{_libdir}/qt6/plugins/kstyle_config/breezestyleconfig.so
+%{_libdir}/qt6/plugins/org.kde.kdecoration3.kcm/kcm_breezedecoration.so
+%{_libdir}/qt6/plugins/org.kde.kdecoration3/org.kde.breeze.so
+%{_libdir}/qt6/plugins/styles/breeze6.so
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
